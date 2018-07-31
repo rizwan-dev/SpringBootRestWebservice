@@ -3,6 +3,7 @@ package com.riztech.springboot.service;
 
 import java.util.List;
 
+import com.kswaughs.services.booksvc.Book;
 import com.riztech.springboot.model.Movie;
 import com.riztech.springboot.model.User;
 
@@ -25,5 +26,7 @@ public interface UserService {
 	void deleteAllUsers();
 	
 	boolean isUserExist(User user);
+	
+	void addBook(Book book);
 	
 }

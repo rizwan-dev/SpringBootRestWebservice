@@ -6,6 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -14,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.kswaughs.services.booksvc.Book;
 import com.riztech.springboot.model.Movie;
 import com.riztech.springboot.model.User;
 
@@ -21,6 +25,12 @@ import com.riztech.springboot.model.User;
 
 @Service("userService")
 public class UserServiceImpl implements UserService{
+	
+	 @Autowired
+	 private BookServiceClient bookSvcClient;
+	 
+	 public static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
 	
 	private static final AtomicLong counter = new AtomicLong();
 	
@@ -108,5 +118,15 @@ public class UserServiceImpl implements UserService{
      
 		return Arrays.asList(result.getBody());
 	}
+
+	@Override
+	public void addBook(Book book) {
+		String status = bookSvcClient.addBook(book);
+
+		logger.info("Book Added Status :{}", status);
+		
+	}
+	
+	
 
 }

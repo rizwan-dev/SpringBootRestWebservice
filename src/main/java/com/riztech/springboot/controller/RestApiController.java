@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.kswaughs.services.booksvc.Book;
 import com.riztech.springboot.model.Movie;
 import com.riztech.springboot.model.User;
 import com.riztech.springboot.service.UserService;
@@ -63,6 +64,14 @@ public class RestApiController {
 					+ " not found"), HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/book/", method = RequestMethod.POST)
+	public ResponseEntity<?> addBook(@RequestBody Book book, UriComponentsBuilder ucBuilder) {
+		logger.info("Creating book : {}", book);
+		userService.addBook(book);
+		HttpHeaders headers = new HttpHeaders();
+		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
 	}
 
 	// -------------------Create a User-------------------------------------------
