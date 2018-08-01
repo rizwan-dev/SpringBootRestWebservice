@@ -10,7 +10,7 @@ import org.springframework.ws.client.core.WebServiceTemplate;
 public class WebSvcClientConfig {
 
 //	@Value("${books.svc.url}")
-	private String url = "http://localhost:8080/MyApp/ws";
+	private String url = "http://localhost:8080/SpringBootRestApi/ws";
 
 	@Bean
 	Jaxb2Marshaller jaxb2Marshaller() {
